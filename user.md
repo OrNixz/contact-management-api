@@ -37,7 +37,8 @@ Response Body Error:
 
 Endpoint: POST /api/users/login
 
-Request Body: 
+Request Body:
+
 ```
 {
     "username": "ornixz",
@@ -46,6 +47,7 @@ Request Body:
 ```
 
 Response Body Success:
+
 ```
 {
     "data": {
@@ -55,6 +57,7 @@ Response Body Success:
 ```
 
 Response Body Error:
+
 ```
 {
     "errors": "Invalid username or password"
@@ -66,9 +69,11 @@ Response Body Error:
 Endpoint: PATCH /api/users/current
 
 Headers:
+
 - Authorization: token
 
 Request Body:
+
 ```
 {
     "name": "Kurosaki Ichigo", // optional
@@ -77,6 +82,7 @@ Request Body:
 ```
 
 Response Body Success:
+
 ```
 {
     "data": {
@@ -87,6 +93,7 @@ Response Body Success:
 ```
 
 Response Body Error:
+
 ```
 {
     "errors": "The maximum length of a username is 100"
@@ -97,10 +104,12 @@ Response Body Error:
 
 Endpoint: GET /api/users/current
 
-Header:
+Headers:
+
 - Authorization: token
 
 Response Body Success:
+
 ```
 {
     "data": {
@@ -111,6 +120,7 @@ Response Body Success:
 ```
 
 Response Body Error:
+
 ```
 {
     "errors: "Unauthorized access"
@@ -121,10 +131,12 @@ Response Body Error:
 
 Endpoint: DELETE /api/users/logout
 
-Header:
+Headers:
+
 - Authorization: token
 
 Response Body Success:
+
 ```
 {
     "data": "Ok"
@@ -132,6 +144,7 @@ Response Body Success:
 ```
 
 Response Body Error:
+
 ```
 {
     "errors": "Unauthorized access"
