@@ -9,7 +9,7 @@ const create = async (req, res, next) => {
       data: result,
     });
   } catch (e) {
-    next();
+    next(e);
   }
 };
 
