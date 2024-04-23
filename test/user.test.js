@@ -171,7 +171,7 @@ describe("PATCH /api/users/current", function () {
     expect(result.status).toBe(200);
     expect(result.body.data.username).toBe("ornixz");
     expect(result.body.data.name).toBe("Kurosaki Ichigo");
-    
+
     const user = await getTestUser();
     expect(await bcrypt.compare("password", user.password)).toBe(true);
   });
@@ -199,7 +199,7 @@ describe("PATCH /api/users/current", function () {
 
     expect(result.status).toBe(200);
     expect(result.body.data.username).toBe("ornixz");
-    
+
     const user = await getTestUser();
     expect(await bcrypt.compare("password", user.password)).toBe(true);
   });
@@ -209,6 +209,36 @@ describe("PATCH /api/users/current", function () {
       .patch("/api/users/current")
       .set("Authorization", "token")
       .send({});
+
+    expect(result.status).toBe(401);
+  });
+});
+
+describe("DELETE /api/users/logout", function () {
+  beforeEach(async () => {
+    await createTestUser();
+  });
+
+  afterEach(async () => {
+    await removeTestUser();
+  });
+
+  it("should can logout", async () => {
+    const result = await supertest(web)
+      .delete("/api/users/logout")
+      .set("Authorization", "test");
+
+    expect(result.status).toBe(200);
+    expect(result.body.data).toBe("Ok");
+
+    const user = await getTestUser();
+    expect(user.token).toBeNull();
+  });
+
+  it("should reject if the token is invalid", async () => {
+    const result = await supertest(web)
+      .delete("/api/users/logout")
+      .set("Authorization", "salah");
 
     expect(result.status).toBe(401);
   });
