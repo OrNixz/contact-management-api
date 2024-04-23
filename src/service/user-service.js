@@ -139,7 +139,7 @@ const logout = async (username) => {
     throw new ResponseError("404", "User not found");
   }
 
-  return prismaClient.user.update({
+  return await prismaClient.user.update({
     where: {
       username: username,
     },
