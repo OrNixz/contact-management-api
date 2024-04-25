@@ -46,10 +46,8 @@ const remove = async (req, res, next) => {
   try {
     const user = req.user;
     const contactId = req.params.contactId;
-    const request = req.body;
-    request.id = contactId;
 
-    await contactService.remove(user, request);
+    await contactService.remove(user, contactId);
     res.status(200).json({
       data: "Ok",
     });
