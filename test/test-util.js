@@ -79,3 +79,27 @@ export const removeAllTestAddresses = async () => {
     },
   });
 };
+
+export const createTestAddress = async () => {
+  const contact = await getTestContact();
+  await prismaClient.address.create({
+    data: {
+      contact_id: contact.id,
+      street: "1 Chome-1-1 Yurakucho",
+      city: "Chiyoda",
+      province: "Tokyo",
+      country: "Japan",
+      postal_code: "100-0006",
+    },
+  });
+};
+
+export const getTestAddress = async () => {
+  return prismaClient.address.findFirst({
+    where: {
+      contact: {
+        username: "ornixz",
+      },
+    },
+  });
+};
