@@ -57,7 +57,7 @@ export const createManyTestContact = async () => {
         last_name: `Ramadhan ${i}`,
         email: `ramadhanafif172${i}@gmail.com`,
         phone: `081209876543${i}`,
-      }
+      },
     });
   }
 };
@@ -66,6 +66,16 @@ export const getTestContact = async () => {
   return prismaClient.contact.findFirst({
     where: {
       username: "ornixz",
+    },
+  });
+};
+
+export const removeAllTestAddresses = async () => {
+  return prismaClient.address.deleteMany({
+    where: {
+      contact: {
+        username: "ornixz",
+      },
     },
   });
 };
