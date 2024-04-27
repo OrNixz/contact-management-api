@@ -140,3 +140,102 @@ describe("GET /api/contacts/:contactId/addresses/:addressId", function () {
     expect(result.body.errors).toBeDefined();
   });
 });
+
+describe("PUT /api/contacts/:contactId/addresses/:addressId", function () {
+  beforeEach(async () => {
+    await createTestUser();
+    await createTestContact();
+    await createTestAddress();
+  });
+
+  afterEach(async () => {
+    await removeAllTestAddresses();
+    await removeAllTestContacts();
+    await removeTestUser();
+  });
+
+  it("should be able to update the address", async () => {
+    const testContact = await getTestContact();
+    const testAddress = await getTestAddress();
+
+    const result = await supertest(web)
+      .put("/api/contacts/" + testContact.id + "/addresses/" + testAddress.id)
+      .set("Authorization", "test")
+      .send({
+        street: "2 Chome-1-1 Nishiikebukuro",
+        city: "Toshima",
+        province: "Tokyo",
+        country: "Japan",
+        postal_code: "171-8507",
+      });
+
+    expect(result.status).toBe(200);
+    expect(result.body.data.id).toBeDefined();
+    expect(result.body.data.street).toBe("2 Chome-1-1 Nishiikebukuro");
+    expect(result.body.data.city).toBe("Toshima");
+    expect(result.body.data.province).toBe("Tokyo");
+    expect(result.body.data.country).toBe("Japan");
+    expect(result.body.data.postal_code).toBe("171-8507");
+  });
+
+  it("should reject if the request is invalid", async () => {
+    const testContact = await getTestContact();
+    const testAddress = await getTestAddress();
+
+    const result = await supertest(web)
+      .put("/api/contacts/" + testContact.id + "/addresses/" + testAddress.id)
+      .set("Authorization", "test")
+      .send({
+        street: "2 Chome-1-1 Nishiikebukuro",
+        city: "Toshima",
+        province: "Tokyo",
+        country: "",
+        postal_code: "",
+      });
+
+    expect(result.status).toBe(400);
+    expect(result.body.errors).toBeDefined();
+  });
+
+  it("should reject if the address is not found", async () => {
+    const testContact = await getTestContact();
+    const testAddress = await getTestAddress();
+
+    const result = await supertest(web)
+      .put(
+        "/api/contacts/" + testContact.id + "/addresses/" + (testAddress.id + 1)
+      )
+      .set("Authorization", "test")
+      .send({
+        street: "2 Chome-1-1 Nishiikebukuro",
+        city: "Toshima",
+        province: "Tokyo",
+        country: "Japan",
+        postal_code: "171-8507",
+      });
+
+    expect(result.status).toBe(404);
+    expect(result.body.errors).toBeDefined();
+  });
+
+  it("should reject if the contact is not found", async () => {
+    const testContact = await getTestContact();
+    const testAddress = await getTestAddress();
+
+    const result = await supertest(web)
+      .put(
+        "/api/contacts/" + (testContact.id + 1) + "/addresses/" + testAddress.id
+      )
+      .set("Authorization", "test")
+      .send({
+        street: "2 Chome-1-1 Nishiikebukuro",
+        city: "Toshima",
+        province: "Tokyo",
+        country: "Japan",
+        postal_code: "171-8507",
+      });
+
+    expect(result.status).toBe(404);
+    expect(result.body.errors).toBeDefined();
+  });
+});
