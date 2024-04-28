@@ -1,0 +1,143 @@
+### Register User
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "ornixz",
+    "password": "rahasia",
+    "name": "Afif Ramadhan"
+}
+
+### Login User
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "ornixz",
+    "password": "rahasia"
+}
+
+### Get Current User
+GET http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Update User
+PATCH http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+{
+    "name": "Kurosaki Ichigo"
+}
+
+### Logout User
+DELETE http://localhost:3000/api/users/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Create Contact
+POST http://localhost:3000/api/contacts
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+{
+    "first_name": "Kurosaki",
+    "last_name": "Ichigo",
+    "email": "ichigoo@gmail.com",
+    "phone": "081284567890"
+}
+
+### Get All Contacts
+GET http://localhost:3000/api/contacts
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Get Contact by Query Params
+# GET http://localhost:3000/api/contacts?name=Kurosaki
+# GET http://localhost:3000/api/contacts?name=Ichigo
+# GET http://localhost:3000/api/contacts?email=ramadhanafif172@yahoo.co.id
+# GET http://localhost:3000/api/contacts?phone=085156565656
+# GET http://localhost:3000/api/contacts?size=1
+GET http://localhost:3000/api/contacts?size=1&page=2
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Get Contact by ID
+GET http://localhost:3000/api/contacts/356
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Update Contact
+PUT http://localhost:3000/api/contacts/356
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+{
+    "first_name": "Ayanokoji",
+    "last_name": "Kaito",
+    "email": "kaito22@gmail.com",
+    "phone": "087875640987"
+}
+
+### Delete Contact
+DELETE http://localhost:3000/api/contacts/357
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Create Address
+POST http://localhost:3000/api/contacts/355/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+{
+    "street": "Jalan Merpati No. 23",
+    "city": "Bandung",
+    "province": "West Java",
+    "postal_code": "40111",
+    "country": "Indonesia"
+}
+
+### List Addresses
+GET http://localhost:3000/api/contacts/355/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Get Address by ID
+GET http://localhost:3000/api/contacts/355/addresses/39
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+### Update Address
+PUT http://localhost:3000/api/contacts/355/addresses/40
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
+
+{
+    "street": "Jalan Melati Utara No. 7",
+    "city": "Surabaya",
+    "province": "East Java",
+    "postal_code": "60231",
+    "country": "Indonesia"
+}
+
+### Remove Address
+DELETE http://localhost:3000/api/contacts/355/addresses/41
+Content-Type: application/json
+Accept: application/json
+Authorization: d6e40eac-3214-4941-ab6d-41b8a18569d1
